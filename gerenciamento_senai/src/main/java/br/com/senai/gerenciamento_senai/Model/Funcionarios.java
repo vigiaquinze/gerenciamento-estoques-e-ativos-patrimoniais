@@ -14,8 +14,7 @@ import lombok.Setter;
 @Setter
 public class Funcionarios implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id_fun;
+    int re;
 
     String email;
 
@@ -24,5 +23,7 @@ public class Funcionarios implements Serializable {
     String nome;
 
     String cargo;
+
+    String senha;
 
 }

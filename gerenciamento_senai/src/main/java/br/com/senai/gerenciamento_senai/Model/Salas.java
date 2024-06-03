@@ -2,11 +2,8 @@ package br.com.senai.gerenciamento_senai.Model;
 
 import java.io.Serializable;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -22,8 +19,8 @@ public class Salas implements Serializable {
 
     private int numero;
 
-    @OneToOne
-    @JoinColumn(name = "id_responsavel", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "responsavel", nullable = false)
     private Funcionarios funcionario;
 
 }
