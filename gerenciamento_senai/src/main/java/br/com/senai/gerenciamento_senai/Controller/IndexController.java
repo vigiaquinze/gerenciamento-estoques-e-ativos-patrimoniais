@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.senai.gerenciamento_senai.Model.Consumo;
 import br.com.senai.gerenciamento_senai.Model.Patrimonio;
+import br.com.senai.gerenciamento_senai.Model.Salas;
 import br.com.senai.gerenciamento_senai.Repository.AdministradorRepository;
+import br.com.senai.gerenciamento_senai.Repository.ConsumoRepository;
 import br.com.senai.gerenciamento_senai.Repository.FuncionariosRepository;
 import br.com.senai.gerenciamento_senai.Repository.PatrimonioRepository;
+import br.com.senai.gerenciamento_senai.Repository.SalasRepository;
 
 @Controller
 public class IndexController {
@@ -22,6 +26,12 @@ public class IndexController {
 
     @Autowired
     private PatrimonioRepository ptR;
+
+    @Autowired
+    private SalasRepository slR;
+
+    @Autowired
+    private ConsumoRepository csR;
 
     private boolean acessoFuncionario = false;
 
@@ -74,11 +84,25 @@ public class IndexController {
         model.addAttribute("patrimonios", patrimonios);
         return "interna/listarPatrimonios";
     }
-    
-    @GetMapping("/listar_p")
-    public String listarPatriomonios(Model model) {
-        List<Patrimonio> patrimonios = ptR.findAll();
-        model.addAttribute("patrimonios", patrimonios);
-        return "interna/listarPatrimonios";
+
+    @GetMapping("/listar_salas")
+    public String listarSalas(Model model) {
+        List<Salas> salas = (List<Salas>) slR.findAll();
+        model.addAttribute("salas", salas);
+        return "interna/listarSalas";
     }
+
+    @GetMapping("/solicitar_movimentacao")
+    public String abrirSolicitarMovimentacao() {
+        return "interna/solicitarMovimentacao";
+    }
+
+    @GetMapping("/listar_armazem")
+    public String listarArmazem(Model model) {
+        List<Consumo> armazem = (List<Consumo>) csR.findAll();
+        model.addAttribute("armazem", armazem);
+        return "interna/listarArmazem";
+    }
+    
+    
 }
