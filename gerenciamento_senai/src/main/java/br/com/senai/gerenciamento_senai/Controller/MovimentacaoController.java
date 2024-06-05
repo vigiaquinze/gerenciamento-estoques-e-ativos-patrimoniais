@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.senai.gerenciamento_senai.Model.Movimentacao;
 import br.com.senai.gerenciamento_senai.Repository.MovimentacaoRepository;
 
-@RestController
+@Controller
 @RequestMapping("/movimentacao")
 public class MovimentacaoController {
     @Autowired

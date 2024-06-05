@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Patrimônio</title>
+</head>
+<body>
+    <h2>Listar Patrimônios</h2>
+    <!-- Se existirem patrimônios encontrados, exibir na tabela -->
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data da compra</th>
+                    <th>Sala</th>
+                    <th>Bloco</th>
+                    <!-- Adicione mais colunas se necessário -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patrimonio : ${patrimonios}">
+                    <td th:text="${patrimonio.id_patrimonio}"></td>
+                    <td th:text="${patrimonio.nome_do_ativo}"></td>
+                    <td th:text="${patrimonio.descricao}"></td>
+                    <td th:text="${patrimonio.data_compra}"></td>
+                    <td th:text="${patrimonio.sala.numero}"></td>
+                    <td th:text="${patrimonio.sala.bloco}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

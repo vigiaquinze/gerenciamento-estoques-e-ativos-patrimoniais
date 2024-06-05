@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Patrimônio</title>
+</head>
+<body>
+    <h2>Buscar Patrimônio</h2>
+    <form action="/buscar_patrimonio" method="get">
+        <input type="text" name="nomeDoPatrimonio" placeholder="Nome do Patrimônio">
+        <button type="submit">Buscar</button>
+    </form>
+    
+    <!-- Se existirem patrimônios encontrados, exibir na tabela -->
+    <div th:if="${patrimoniosEncontrados != null}">
+        <h3>Resultados da Busca</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Sala</th>
+                    <th>Bloco</th>
+                    <!-- Adicione mais colunas se necessário -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patrimonio : ${patrimoniosEncontrados}">
+                    <td th:text="${patrimonio.id_patrimonio}"></td>
+                    <td th:text="${patrimonio.nome_do_ativo}"></td>
+                    <td th:text="${patrimonio.descricao}"></td>
+                    <td th:text="${patrimonio.sala.numero}"></td>
+                    <td th:text="${patrimonio.sala.bloco}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

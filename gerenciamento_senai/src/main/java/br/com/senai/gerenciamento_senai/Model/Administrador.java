@@ -1,7 +1,5 @@
 package br.com.senai.gerenciamento_senai.Model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -10,18 +8,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Funcionarios implements Serializable {
+public class Administrador {
     @Id
-    int re;
+    int id_adm;
 
-    String email;
+    String cpf;
 
-    String setor;
-
-    String nome;
-
-    String cargo;
+    String usuario;
 
     String senha;
-
 }

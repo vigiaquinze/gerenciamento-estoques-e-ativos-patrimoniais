@@ -28,7 +28,7 @@ public class Movimentacao {
 
     @OneToOne
     @JoinColumn(name="aprovador_id", nullable = false)
-    private Funcionarios aprovador;
+    private Administrador aprovador;
 
     String status;
 
