@@ -104,5 +104,12 @@ public class IndexController {
         return "interna/listarArmazem";
     }
     
+
+    @GetMapping("/logout")
+    public String logout() {
+        acessoFuncionario = false;
+        return "redirect:/login";
+    }
+    
     
 }

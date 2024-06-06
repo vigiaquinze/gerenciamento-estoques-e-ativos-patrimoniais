@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Consumo</title>
+</head>
+
+<body>
+    <h2>Ambientes cadastrados</h2>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Bloco</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ambiente : ${ambientes}">
+                    <td th:text="${ambiente.id}"></td>
+                    <td th:text="${ambiente.nome}"></td>
+                    <td th:text="${ambiente.bloco}"></td>
+                    <td class="actions">
+                        <a href="" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                        <a href="" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/cadastro-sala">
+        <div class="link-cadastro">
+            <h1>Cadastrar novo Ambiente</h1>
+        </div>
+    </a>
+</body>
+
+</html>

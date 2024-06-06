@@ -6,4 +6,5 @@ import br.com.senai.gerenciamento_senai.Model.Consumo;
 
 public interface ConsumoRepository extends CrudRepository<Consumo, Integer>{
 
+
 }

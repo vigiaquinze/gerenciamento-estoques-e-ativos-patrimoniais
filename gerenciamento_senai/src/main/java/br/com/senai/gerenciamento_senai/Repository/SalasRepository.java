@@ -6,4 +6,8 @@ import br.com.senai.gerenciamento_senai.Model.Salas;
 
 public interface SalasRepository extends CrudRepository<Salas, Integer>{
 
+    Salas findByNome(String nome);
+
+    boolean existsByNome(String nome);
+
 }

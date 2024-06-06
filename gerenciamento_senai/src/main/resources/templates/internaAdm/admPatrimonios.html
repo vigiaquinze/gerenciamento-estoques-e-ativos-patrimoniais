@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Patrimônio</title>
+</head>
+
+<body>
+    <h2>Patrimônios</h2>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data da compra</th>
+                    <th>Sala</th>
+                    <th>Bloco</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patrimonio : ${patrimonios}">
+                    <td th:text="${patrimonio.id_patrimonio}"></td>
+                    <td th:text="${patrimonio.nome_do_ativo}"></td>
+                    <td th:text="${patrimonio.descricao}"></td>
+                    <td th:text="${patrimonio.data_compra}"></td>
+                    <td th:text="${patrimonio.sala.numero}"></td>
+                    <td th:text="${patrimonio.sala.bloco}"></td>
+                    <td class="actions">
+                        <a href="" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                        <a href="" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/cadastro-patrimonio">
+        <div class="link-cadastro">
+            <h1>Cadastrar patrimonio</h1>
+        </div>
+    </a>
+</body>
+
+</html>

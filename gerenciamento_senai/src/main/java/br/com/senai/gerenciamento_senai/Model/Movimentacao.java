@@ -44,4 +44,8 @@ public class Movimentacao {
     @OneToOne
     @JoinColumn(name="id_destino", nullable = false, referencedColumnName = "id")
     private Salas destino;
+
+    @OneToOne
+    @JoinColumn(name = "id_ativo", nullable = false, referencedColumnName = "id_patrimonio")
+    private Patrimonio ativo;
 }
