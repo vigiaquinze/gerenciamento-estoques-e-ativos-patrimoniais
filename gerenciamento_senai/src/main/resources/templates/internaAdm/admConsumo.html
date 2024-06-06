@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Consumo</title>
+</head>
+
+<body>
+    <h2>Estoque - itens de Consumo</h2>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Qntd estoque</th>
+                    <th>Data da ultima compra</th>
+                    <th>Categoria</th>
+                    <th>Local armazenado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${itens}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.nome_produto}"></td>
+                    <td th:text="${item.quantidade}"></td>
+                    <td th:text="${item.data_compra}"></td>
+                    <td th:text="${item.categoria}"></td>
+                    <td th:text="${item.local_armazem}"></td>
+                    <td class="actions">
+                        <a href="" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                        <a href="" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/cadastro-consumo">
+        <div class="link-cadastro">
+            <h1>Cadastrar item</h1>
+        </div>
+    </a>
+</body>
+
+</html>

@@ -3,7 +3,11 @@ package br.com.senai.gerenciamento_senai.Repository;
 import org.springframework.data.repository.CrudRepository;
 
 import br.com.senai.gerenciamento_senai.Model.Administrador;
+import java.util.List;
 
-public interface AdministradorRepository extends CrudRepository<Administrador, Integer>{
-    
+public interface AdministradorRepository extends CrudRepository<Administrador, Integer> {
+
+    Administrador findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

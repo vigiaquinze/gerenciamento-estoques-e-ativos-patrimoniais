@@ -11,4 +11,5 @@ public interface PatrimonioRepository extends JpaRepository<Patrimonio, Integer>
 
     @Query("SELECT p FROM Patrimonio p WHERE LOWER(p.nome_do_ativo) LIKE LOWER(CONCAT('%', :nomeDoAtivo, '%'))")
     List<Patrimonio> findByNomeDoAtivo(@Param("nomeDoAtivo") String nomeDoAtivo);
+
 }

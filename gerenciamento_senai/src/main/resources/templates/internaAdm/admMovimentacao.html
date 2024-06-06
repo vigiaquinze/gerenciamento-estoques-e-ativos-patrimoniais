@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movimentações</title>
+</head>
+
+<body>
+    <h2>Histórico de movimentações</h2>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ativo</th>
+                    <th>Status</th>
+                    <th>Origem</th>
+                    <th>Destino</th>
+                    <th>Solicitante</th>
+                    <th>Data</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="movimentacao : ${movimentacoes}">
+                    <td th:text="${movimentacao.id_mov}"></td>
+                    <td th:text="${movimentacao.ativo.nome_do_ativo}"></td>
+                    <td th:text="${movimentacao.status}"></td>
+                    <td th:text="${movimentacao.origem.numero+movimentacao.origem.bloco}"></td>
+                    <td th:text="${movimentacao.destino.numero+movimentacao.origem.bloco}"></td>
+                    <td th:text="${movimentacao.data_movimentacao}"></td>
+                    <td class="actions">
+                        <a href="" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                        <a href="" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/cadastro-movimentacao">
+        <div class="link-cadastro">
+            <h1>Realizar uma nova movimentacao</h1>
+        </div>
+    </a>
+</body>
+
+</html>

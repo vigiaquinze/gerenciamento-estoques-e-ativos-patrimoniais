@@ -17,7 +17,7 @@ public class Salas implements Serializable {
 
     private String bloco;
 
-    private int numero;
+    private String nome;
 
     @ManyToOne
     @JoinColumn(name = "responsavel", nullable = false)

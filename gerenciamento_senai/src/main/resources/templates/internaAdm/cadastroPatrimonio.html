@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Patrimônio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <span class="${classe}" th:text="${msg}"></span>
+        <h2>Cadastro de Patrimônio</h2>
+        <form action="/cadastro-patrimonio" method="POST">
+            <div class="form-group">
+                <label for="nome_do_ativo">Nome do Ativo:</label>
+                <input type="text" class="form-control" id="nome_do_ativo" name="nome_do_ativo" required>
+            </div>
+            <div class="form-group">
+                <label for="data_compra">Data de Compra:</label>
+                <input type="date" class="form-control" id="data_compra" name="data_compra" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <input type="text" class="form-control" id="status" name="status" required>
+            </div>
+            <div class="form-group">
+                <label for="sala">Sala:</label>
+                <input type="text" class="form-control" id="sala" name="sala" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap
