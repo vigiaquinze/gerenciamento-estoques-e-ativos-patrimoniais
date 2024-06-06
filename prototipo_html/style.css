@@ -28,14 +28,14 @@ ul {
     z-index: 999;
 }
 
-li {
-    margin: 10px 0px 10px -20px;
-    font-weight: 600;
+.sideBar li {
+    margin: 13px 0px 13px -20px;
+    font-weight: 400;
     font-size: 22px;
 }
 
 i {
-    margin: 0px 10px;
+    margin: 0px 13px;
 }
 
 .active {
@@ -51,8 +51,60 @@ i {
     margin: 0px auto;
     border-bottom: 3px solid #DDB9BB;
     border-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navBar ul {
-    margin: 0px;
+    margin: 0px 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navBar li {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+.navBar input {
+    border-radius: 16px;
+    padding: 5px 13px;
+    border: 2px solid #c4c4c4;
+    font-family: "Bricolage Grotesque", sans-serif;
+    transition: 2s;
+    appearance: none;
+    width: 200px;
+}
+
+input:focus {
+    border: 2px solid #ffffff;
+    transition: 2s;
+    appearance: none;
+}
+
+input:active {
+    border: 2px solid #ffffff;
+    transition: 2s;
+    outline: 0px solid;
+    appearance: none;
+}
+
+.iconsBar {
+    display: flex;
+    color: #1e1e1e;
+    align-items: center;
+    float: right;
+    right: 0;
+    position: absolute;
+    margin: 0px 26px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.iconsBar img {
+    border-radius: 50%;
+    width: 40px;
 }
