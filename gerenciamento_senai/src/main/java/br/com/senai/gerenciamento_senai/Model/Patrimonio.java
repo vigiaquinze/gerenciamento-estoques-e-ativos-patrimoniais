@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
@@ -35,4 +36,18 @@ public class Patrimonio implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ambiente", nullable = false)
     private Salas sala;
+
+    // Método setId
+    public void setId(Integer id) {
+        this.id_patrimonio = id;
+    }
+
+    @PrePersist
+    protected void prePersist() {
+        // Define o status padrão como "OTIMO" se não for especificado
+        if (this.status == null) {
+            this.status = "OTIMO";
+        }
+    }
 }
+

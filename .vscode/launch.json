@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GerenciamentoSenaiApplication<gerenciamento_senai>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.senai.gerenciamento_senai.GerenciamentoSenaiApplication",
+            "projectName": "gerenciamento_senai",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

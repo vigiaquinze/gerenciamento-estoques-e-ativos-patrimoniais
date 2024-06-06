@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Patrimônio</title>
+</head>
+<body>
+    <h1>Cadastro de Patrimônio</h1>
+    <form action="/funcionarios-gerenciamento-patrimonios" method="post">
+        <!-- Cria um formulário para enviar dados -->
+        <label for="nome">Nome do Ativo:</label>
+        <!-- Cria um rótulo para o campo de entrada de texto -->
+        <input type="text" id="nome" name="nome_do_ativo" required><br>
+        <!-- Cria um campo de entrada de texto para o nome do ativo -->
+
+        <label for="data_compra">Data de Compra:</label>
+        <!-- Cria um rótulo para o campo de entrada de data -->
+        <input type="date" id="data_compra" name="data_compra" required><br>
+        <!-- Cria um campo de entrada de data para a data de compra -->
+
+        <label for="descricao">Descrição:</label><br>
+        <!-- Cria um rótulo para o campo de entrada de texto grande -->
+        <textarea id="descricao" name="descricao" required></textarea><br>
+        <!-- Cria um campo de entrada de texto grande para a descrição -->
+
+        <label for="status">Status:</label>
+        <!-- Cria um rótulo para o menu suspenso de seleção -->
+        <select id="status" name="status">
+            <!-- Cria um menu suspenso de seleção para o status -->
+            <option value="Em uso">Otimo</option>
+            <!-- Define a primeira opção do menu suspenso -->
+            <option value="Em manutenção">Bom</option>
+            <!-- Define a segunda opção do menu suspenso -->
+            <option value="Fora de uso">Ruim</option>
+            <!-- Define a terceira opção do menu suspenso -->
+        </select><br>
+
+        <input type="submit" value="Enviar">
+        <!-- Cria um botão de envio do formulário -->
+    </form>
+</body>
+</html>
