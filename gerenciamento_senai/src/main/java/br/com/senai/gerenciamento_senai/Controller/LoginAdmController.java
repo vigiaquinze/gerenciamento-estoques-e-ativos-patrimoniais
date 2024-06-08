@@ -1,11 +1,13 @@
 package br.com.senai.gerenciamento_senai.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -86,7 +88,7 @@ public class LoginAdmController {
 
     @GetMapping("/adm_patrimonio")
     public String listarPatriomonios(Model model) {
-        List<Patrimonio> patrimonios = ptR.findAll();
+        List<Patrimonio> patrimonios = (List<Patrimonio>) ptR.findAll();
         model.addAttribute("patrimonios", patrimonios);
         return "internaAdm/admPatrimonios";
     }
@@ -213,4 +215,20 @@ public class LoginAdmController {
         return mv;
     }
 
+    @GetMapping("/cadastro-movimentacao")
+    public String cadastrarMovimentacao(@RequestParam(required = false) String idPatrimonio,
+            @RequestParam(required = false) String emailDoSolicitante, Model model) {
+        if (idPatrimonio != null && !idPatrimonio.isEmpty() && emailDoSolicitante != null
+                && !emailDoSolicitante.isEmpty()) {
+            Funcionarios solicitante = fnR.findByEmail(emailDoSolicitante);
+            Optional<Patrimonio> patrimonio = ptR.findById(Integer.parseInt(idPatrimonio));
+
+            if (solicitante != null && patrimonio != null) {
+                model.addAttribute("solicitante", solicitante);
+                model.addAttribute("patrimonio", patrimonio.get());
+            }
+
+        }
+        return "internaAdm/cadastroMovimentacao";
+    }
 }

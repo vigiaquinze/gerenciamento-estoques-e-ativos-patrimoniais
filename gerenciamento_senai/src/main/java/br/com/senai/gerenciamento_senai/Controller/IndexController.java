@@ -63,7 +63,7 @@ public class IndexController {
     @GetMapping("/interna")
     public String getInternaPage() {
         if (acessoFuncionario) {
-            return "interna";
+            return "interna/interna";
         } else {
             return "redirect:/login";
         }
@@ -80,7 +80,7 @@ public class IndexController {
 
     @GetMapping("/listar_patrimonios")
     public String listarPatriomonios(Model model) {
-        List<Patrimonio> patrimonios = ptR.findAll();
+        List<Patrimonio> patrimonios = (List<Patrimonio>) ptR.findAll();
         model.addAttribute("patrimonios", patrimonios);
         return "interna/listarPatrimonios";
     }

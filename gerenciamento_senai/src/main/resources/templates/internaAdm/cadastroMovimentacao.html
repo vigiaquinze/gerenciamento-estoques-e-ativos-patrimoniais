@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Patrimônio</title>
+</head>
+
+<body>
+    <h2>Realizar movimentacao</h2>
+    <form action="/cadastro-movimentacao" method="get">
+        <input type="text" name="idPatrimonio" placeholder="Id do Patrimônio">
+        <input type="text" name="emailDoSolicitante" placeholder="Email do solicitante">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Se existirem patrimônios encontrados, exibir na tabela -->
+    <div th:if="${solicitante != null && patrimonio != null}">
+        <div class="container mt-5">
+            <!-- <span class="${classe}" th:text="${msg}"></span> -->
+            <form action="/cadastro-movimentacao" method="POST">
+                <div class="form-group">
+                    <label for="solicitante">Solicitante:</label>
+                    <input type="text" class="form-control" id="solicitante" name="solicitante"
+                        th:text="${solicitante.nome}" th:value="${solicitante.re}" readonly required>
+                </div>
+                <div class="form-group">
+                    <label for="data_movimentacao">Data da Movimentação:</label>
+                    <input type="date" class="form-control" id="data_movimentacao" name="data_movimentacao" required>
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="origem">Origem:</label>
+                    <input type="text" class="form-control" id="origem" name="origem" th:value="${patrimonio.sala.id}"
+                        th:text="${patrimonio.sala.nome}" readonly required>
+                </div>
+                <div class="form-group">
+                    <label for="destino">Destino:</label>
+                    <input type="text" class="form-control" id="destino" name="destino" required>
+                </div>
+                <div class="form-group">
+                    <label for="ativo">Ativo:</label>
+                    <input type="text" class="form-control" id="ativo" name="ativo"
+                        th:text="${patrimonio.nome_do_ativo}" th:value="${patrimonio.id_patrimonio}" required readonly>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>
