@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Saída</title>
+</head>
+
+<body>
+    <h2>Registrar Saída de Itens do Estoque</h2>
+    <form action="/registrar-saida" method="post">
+        <div>
+            <label for="item">Selecione o Item:</label>
+            <select id="item" name="item">
+                <option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.nome_produto}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" min="1">
+        </div>
+        <button type="submit">Registrar Saída</button>
+    </form>
+</body>
+
+</html>

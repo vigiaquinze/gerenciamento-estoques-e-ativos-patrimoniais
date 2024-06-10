@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="content">
+        <h2>Confirmação de Reprovação</h2>
+        <p>Você tem certeza que deseja reprovar essa movimentação?</p>
+        <div>
+            <a th:href="@{/reprovarConfirmado/{id}(id=${movimentacao.id_mov})}" class="button">Sim</a>
+            <a th:href="@{/aprovar-movimentacao}" class="button">Não</a>
+        </div>
+    </div>
+</body>
+</html>

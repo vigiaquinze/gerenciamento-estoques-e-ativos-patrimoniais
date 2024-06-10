@@ -5,7 +5,7 @@
     <title>Listar Armazem</title>
 </head>
 <body>
-    <h2>Listar Armazem</h2>
+    <h2>Estoque de itens de consumo</h2>
     <div>
         <table border="1">
             <thead>
@@ -24,11 +24,16 @@
                     <td th:text="${armazem.nome_produto}"></td>
                     <td th:text="${armazem.quantidade}"></td>
                     <td th:text="${armazem.data_compra}"></td>
-                    <td th:text="${armazem.categoria_produto}"></td>
+                    <td th:text="${armazem.categoria}"></td>
                     <td th:text="${armazem.local_armazem}"></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <a href="/registrar-saida" class="link">
+        <div>
+            Registrar saída
+        </div>
+    </a>
 </body>
 </html>

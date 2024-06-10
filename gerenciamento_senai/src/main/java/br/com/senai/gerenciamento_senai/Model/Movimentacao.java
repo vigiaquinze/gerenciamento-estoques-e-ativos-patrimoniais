@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
@@ -24,15 +25,14 @@ public class Movimentacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id_mov;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="solicitante_id", nullable = false)
     private Funcionarios solicitante;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'PENDENTE'")
     String status;
 
-    @Temporal(TemporalType.DATE)
-    Date data_movimentacao;
+    String data_movimentacao;
 
     String descricao;
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -224,11 +225,69 @@ public class LoginAdmController {
             Optional<Patrimonio> patrimonio = ptR.findById(Integer.parseInt(idPatrimonio));
 
             if (solicitante != null && patrimonio != null) {
+                List<Salas> salas = (List<Salas>) slR.findAll();
+                model.addAttribute("salas", salas);
+                model.addAttribute("msg", "Funcionario e patriomonio encontrado!");
                 model.addAttribute("solicitante", solicitante);
                 model.addAttribute("patrimonio", patrimonio.get());
+            } else {
+                model.addAttribute("msg", "Funcionario e/ou patriomonio não encontrado!");
             }
 
         }
         return "internaAdm/cadastroMovimentacao";
     }
+
+    @PostMapping("/cadastro-movimentacao")
+    public String cadastrarMovimentacao(Movimentacao movimentacao, Model model) {
+        try {
+            mvR.save(movimentacao);
+            return "redirect:/adm_mov";
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    }
+
+    @GetMapping("/aprovar-movimentacao")
+    public String abrirAprovarMovimentacao(Model model) {
+        List<Movimentacao> movimentacoesPendentes = mvR.findAllPendentes();
+        model.addAttribute("movimentacoes", movimentacoesPendentes);
+        return "internaAdm/aprovaMovimentacao";
+    }
+
+    @GetMapping("/aprovar/{id}")
+    public String confirmarAprovacao(@PathVariable("id") Integer id, Model model) {
+        Optional<Movimentacao> movimentacao = mvR.findById(id);
+        model.addAttribute("movimentacao", movimentacao.get());
+        return "internaAdm/confirmaAprovacao";
+    }
+
+    @GetMapping("/aprovarConfirmado/{id}")
+    public String aprovarMovimentacao(@PathVariable("id") Integer id) {
+        Optional<Movimentacao> movimentacao = mvR.findById(id);
+        if (movimentacao.get() != null) {
+            movimentacao.get().setStatus("APROVADO");
+            mvR.save(movimentacao.get());
+        }
+        return "redirect:/aprovar-movimentacao";
+    }
+
+    @GetMapping("/reprovar/{id}")
+    public String confirmarReprovacao(@PathVariable("id") Integer id, Model model) {
+        Optional<Movimentacao> movimentacao = mvR.findById(id);
+        model.addAttribute("movimentacao", movimentacao.get());
+        return "internaAdm/confirmaReprovacao";
+    }
+
+    @GetMapping("/reprovarConfirmado/{id}")
+    public String reprovarMovimentacao(@PathVariable("id") Integer id) {
+        Optional<Movimentacao> movimentacao = mvR.findById(id);
+        if (movimentacao.get() != null) {
+            movimentacao.get().setStatus("REPROVADO");
+            mvR.save(movimentacao.get());
+        }
+        return "redirect:/aprovar-movimentacao";
+    }
+
 }

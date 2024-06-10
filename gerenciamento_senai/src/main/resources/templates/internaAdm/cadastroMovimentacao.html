@@ -13,16 +13,16 @@
         <input type="text" name="emailDoSolicitante" placeholder="Email do solicitante">
         <button type="submit">Buscar</button>
     </form>
-
+    <span class="${classe}" th:text="${msg}"></span>
     <!-- Se existirem patrimônios encontrados, exibir na tabela -->
     <div th:if="${solicitante != null && patrimonio != null}">
         <div class="container mt-5">
-            <!-- <span class="${classe}" th:text="${msg}"></span> -->
+
             <form action="/cadastro-movimentacao" method="POST">
                 <div class="form-group">
                     <label for="solicitante">Solicitante:</label>
                     <input type="text" class="form-control" id="solicitante" name="solicitante"
-                        th:text="${solicitante.nome}" th:value="${solicitante.re}" readonly required>
+                        th:value="${solicitante.re}" readonly required>
                 </div>
                 <div class="form-group">
                     <label for="data_movimentacao">Data da Movimentação:</label>
@@ -39,7 +39,9 @@
                 </div>
                 <div class="form-group">
                     <label for="destino">Destino:</label>
-                    <input type="text" class="form-control" id="destino" name="destino" required>
+                    <select class="form-control" id="destino" name="destino" required>
+                        <option th:each="sala : ${salas}" th:value="${sala.id}" th:text="${sala.nome}"></option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="ativo">Ativo:</label>
@@ -48,6 +50,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
+            <span class="${classe}" th:text="${msgCad}"></span>
         </div>
 
     </div>
