@@ -36,15 +36,15 @@ public class Movimentacao {
 
     String descricao;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="id_origem", nullable = false, referencedColumnName = "id")
     private Salas origem;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="id_destino", nullable = false, referencedColumnName = "id")
     private Salas destino;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_ativo", nullable = false, referencedColumnName = "id_patrimonio")
     private Patrimonio ativo;
 

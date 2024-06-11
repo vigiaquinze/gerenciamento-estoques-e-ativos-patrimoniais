@@ -27,8 +27,7 @@ public class Patrimonio implements Serializable {
 
     private String nome_do_ativo;
 
-    @Temporal(TemporalType.DATE)
-    private Date data_compra;
+    private String data_compra;
 
     private String descricao;
 

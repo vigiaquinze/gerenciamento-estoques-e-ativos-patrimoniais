@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
@@ -23,6 +27,7 @@ import br.com.senai.gerenciamento_senai.Repository.FuncionariosRepository;
 import br.com.senai.gerenciamento_senai.Repository.MovimentacaoRepository;
 import br.com.senai.gerenciamento_senai.Repository.PatrimonioRepository;
 import br.com.senai.gerenciamento_senai.Repository.SalasRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class IndexController {
@@ -92,6 +97,43 @@ public class IndexController {
         List<Patrimonio> patrimonios = (List<Patrimonio>) ptR.findAll();
         model.addAttribute("patrimonios", patrimonios);
         return "interna/listarPatrimonios";
+    }
+
+    @GetMapping("/cadastrar_patrimonio")
+    public String abrirCadastrarPatrimonios(Model model) {
+        if (!acessoFuncionario) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("salas", slR.findAll());
+            return "interna/cadastrarPatrimonio";
+        }
+    }
+
+    @PostMapping("/cadastrar_patrimonio")
+    public ModelAndView cadastrarPatrimonio(Patrimonio patrimonio, RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/cadastrar_patrimonio");
+
+        boolean nomeJaExiste = false;
+        List<Patrimonio> allPatrimonios = (List<Patrimonio>) ptR.findAll();
+        for (Patrimonio patrimonio2 : allPatrimonios) {
+            if (patrimonio2.getNome_do_ativo().toLowerCase() == patrimonio.getNome_do_ativo().toLowerCase()) {
+                nomeJaExiste = true;
+                break;
+            }
+        }
+
+        if (!nomeJaExiste) {
+            ptR.save(patrimonio);
+            String mensagem = "Cadastro realizado com sucesso";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+        } else {
+            String mensagem = "Patrimonio ja cadastrado!";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+        }
+
+        return mv;
     }
 
     @GetMapping("/listar_salas")
@@ -167,6 +209,53 @@ public class IndexController {
             throw new RuntimeException("Item não encontrado no estoque");
         }
         return "redirect:/listar_armazem"; // Redireciona de volta para a página de registro de saída
+    }
+
+    @GetMapping("/verificarPatrimonios/{id}")
+    public String verificarPatrimonios(@PathVariable("id") Integer id, Model model) {
+        Optional<Salas> salaSelecionada = slR.findById(id);
+        if (salaSelecionada != null) {
+            List<Patrimonio> patrimonios = ptR.findBySala(salaSelecionada.get());
+            model.addAttribute("patrimonios", patrimonios);
+            model.addAttribute("sala", salaSelecionada.get());
+            return "interna/verPatrimoniosSala";
+        } else {
+            return "redirect:/listar_salas";
+        }
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarPatrimonio(@PathVariable("id") Integer id, Model model) {
+        if (!acessoFuncionario) {
+            return "redirect:/login";
+        } else {
+            Optional<Patrimonio> patrimonio = ptR.findById(id);
+            if (patrimonio != null) {
+                model.addAttribute("patrimonio", patrimonio.get());
+                return "interna/editaPatrimonio";
+            } else {
+                return "redirect:/listar_patrimonios";
+            }
+
+        }
+    }
+
+    @PostMapping("/editar/{id}")
+    public String enviaEditarPatriomonio(@PathVariable("id") Integer id,Patrimonio patrimonio) {
+        try {
+            patrimonio.setId_patrimonio(id);
+            ptR.save(patrimonio);
+            return "redirect:/listar_patrimonios";
+        } catch (Exception e) {
+            System.err.println(e);
+            return "redirect:/listar_patrimonios";
+        }
+    }
+
+    @GetMapping("/listar_movimentacoes")
+    public String getMethodName(Model model) {
+        model.addAttribute("movimentacoes", mvR.findAll());
+        return "interna/listarMovimentacoes";
     }
 
     @GetMapping("/logout")

@@ -23,6 +23,7 @@
                         <td>Destino</td>
                         <td>Solicitante</td>
                         <td>Data</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,25 +35,14 @@
                         <td th:text="${movimentacao.destino.nome}"></td>
                         <td th:text="${movimentacao.solicitante.nome}"></td>
                         <td th:text="${movimentacao.data_movimentacao}"></td>
+                        <td class="actions">
+                            <a  th:href="@{/concluir/{id}(id=${movimentacao.id_mov})}" class="aprovar"><i class="fas fa-check-circle"></i></a>
+                            <a th:href="@{/cancelar/{id}(id=${movimentacao.id_mov})}" class="trash"><i class="fas fa-times-circle"></i></a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <a href="/cadastro-movimentacao" class="link-cadastro">
-            <div>
-                <h1>Realizar uma nova movimentacao</h1>
-            </div>
-        </a>
-        <a href="/aprovar-movimentacao" class="link-cadastro">
-            <div>
-                <h1>Aprovar movimentacoes</h1>
-            </div>
-        </a>
-        <a href="/editar-movimentacao" class="link-cadastro">
-            <div>
-                <h1>Editar/Finalizar movimentacoes</h1>
-            </div>
-        </a>
     </div>
 </body>
 

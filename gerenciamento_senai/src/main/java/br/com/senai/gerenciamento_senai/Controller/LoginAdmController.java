@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import br.com.senai.gerenciamento_senai.Model.Consumo;
 import br.com.senai.gerenciamento_senai.Model.Funcionarios;
 import br.com.senai.gerenciamento_senai.Model.Movimentacao;
@@ -73,11 +75,13 @@ public class LoginAdmController {
         } else {
             return "Adm não encontrado!";
         }
-
     }
 
     @GetMapping("/interna-adm")
     public String abrirInternaAdm() {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         return "internaAdm/internaIndex";
     }
 
@@ -89,6 +93,9 @@ public class LoginAdmController {
 
     @GetMapping("/adm_patrimonio")
     public String listarPatriomonios(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         List<Patrimonio> patrimonios = (List<Patrimonio>) ptR.findAll();
         model.addAttribute("patrimonios", patrimonios);
         return "internaAdm/admPatrimonios";
@@ -96,6 +103,9 @@ public class LoginAdmController {
 
     @GetMapping("/adm_funcionarios")
     public String listarFuncionarios(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         List<Funcionarios> funcionarios = (List<Funcionarios>) fnR.findAll();
         model.addAttribute("funcionarios", funcionarios);
         return "internaAdm/admFuncionarios";
@@ -103,6 +113,9 @@ public class LoginAdmController {
 
     @GetMapping("/adm_consumo")
     public String listarConsumo(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         List<Consumo> itens = (List<Consumo>) csR.findAll();
         model.addAttribute("itens", itens);
         return "internaAdm/admConsumo";
@@ -110,6 +123,9 @@ public class LoginAdmController {
 
     @GetMapping("/adm_mov")
     public String listMovimentacao(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         List<Movimentacao> movimentacoes = (List<Movimentacao>) mvR.findAll();
         model.addAttribute("movimentacoes", movimentacoes);
         return "internaAdm/admMovimentacao";
@@ -117,6 +133,9 @@ public class LoginAdmController {
 
     @GetMapping("/adm_sala")
     public String listAmbientes(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         List<Salas> ambientes = (List<Salas>) slR.findAll();
         model.addAttribute("ambientes", ambientes);
         return "internaAdm/admAmbientes";
@@ -124,12 +143,14 @@ public class LoginAdmController {
 
     @GetMapping("/cadastro-funcionario")
     public String abrirCadastrarFuncionario() {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         return "internaAdm/cadastroFuncionario";
     }
 
     @PostMapping("/cadastro-funcionario")
     public ModelAndView admCadastrarFuncionario(Funcionarios funcionario, RedirectAttributes attributes) {
-
         ModelAndView mv = new ModelAndView("redirect:/cadastro-funcionario");
 
         if (!fnR.existsByEmail(funcionario.getEmail()) && !fnR.existsById(funcionario.getRe())) {
@@ -148,12 +169,14 @@ public class LoginAdmController {
 
     @GetMapping("/cadastro-sala")
     public String abrirCadastroSala() {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         return "internaAdm/cadastroAmbiente";
     }
 
     @PostMapping("/cadastro-sala")
     public ModelAndView admCadastrarSala(Salas sala, RedirectAttributes attributes) {
-
         ModelAndView mv = new ModelAndView("redirect:/cadastro-sala");
 
         if (slR.existsByNome(sala.getNome())) {
@@ -172,6 +195,9 @@ public class LoginAdmController {
 
     @GetMapping("/cadastro-consumo")
     public String abrirCadastroConsumo() {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         return "internaAdm/cadastroConsumo";
     }
 
@@ -194,24 +220,38 @@ public class LoginAdmController {
     }
 
     @GetMapping("/cadastro-patrimonio")
-    public String abrirCadastroPatrimonio() {
-        return "internaAdm/cadastroPatrimonio";
+    public String abrirCadastroPatrimonio(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            model.addAttribute("salas", slR.findAll());
+            return "internaAdm/cadastroPatrimonio";
+        }
     }
 
     @PostMapping("/cadastro-patrimonio")
     public ModelAndView admCadastrarPatrimonio(Patrimonio patrimonio, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/cadastro-patrimonio");
 
-        // if (!ptR.existsByNomeDoAtivo(patrimonio.getNome_do_ativo())) {
-        ptR.save(patrimonio);
-        String mensagem = "Cadastro realizado com sucesso";
-        System.out.println(mensagem);
-        attributes.addFlashAttribute("msg", mensagem);
-        // } else {
-        // String mensagem = "Erro! Cadastro inválido. Ativo já cadastrado!";
-        // System.out.println(mensagem);
-        // attributes.addFlashAttribute("msg", mensagem);
-        // }
+        boolean nomeJaExiste = false;
+        List<Patrimonio> allPatrimonios = (List<Patrimonio>) ptR.findAll();
+        for (Patrimonio patrimonio2 : allPatrimonios) {
+            if (patrimonio2.getNome_do_ativo().toLowerCase() == patrimonio.getNome_do_ativo().toLowerCase()) {
+                nomeJaExiste = true;
+                break;
+            }
+        }
+
+        if (!nomeJaExiste) {
+            ptR.save(patrimonio);
+            String mensagem = "Cadastro realizado com sucesso";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+        } else {
+            String mensagem = "Patrimonio ja cadastrado!";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+        }
 
         return mv;
     }
@@ -219,6 +259,9 @@ public class LoginAdmController {
     @GetMapping("/cadastro-movimentacao")
     public String cadastrarMovimentacao(@RequestParam(required = false) String idPatrimonio,
             @RequestParam(required = false) String emailDoSolicitante, Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         if (idPatrimonio != null && !idPatrimonio.isEmpty() && emailDoSolicitante != null
                 && !emailDoSolicitante.isEmpty()) {
             Funcionarios solicitante = fnR.findByEmail(emailDoSolicitante);
@@ -233,7 +276,6 @@ public class LoginAdmController {
             } else {
                 model.addAttribute("msg", "Funcionario e/ou patriomonio não encontrado!");
             }
-
         }
         return "internaAdm/cadastroMovimentacao";
     }
@@ -251,6 +293,9 @@ public class LoginAdmController {
 
     @GetMapping("/aprovar-movimentacao")
     public String abrirAprovarMovimentacao(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
         List<Movimentacao> movimentacoesPendentes = mvR.findAllPendentes();
         model.addAttribute("movimentacoes", movimentacoesPendentes);
         return "internaAdm/aprovaMovimentacao";
@@ -258,36 +303,122 @@ public class LoginAdmController {
 
     @GetMapping("/aprovar/{id}")
     public String confirmarAprovacao(@PathVariable("id") Integer id, Model model) {
-        Optional<Movimentacao> movimentacao = mvR.findById(id);
-        model.addAttribute("movimentacao", movimentacao.get());
-        return "internaAdm/confirmaAprovacao";
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            model.addAttribute("movimentacao", movimentacao.get());
+            return "internaAdm/confirmaAprovacao";
+        }
     }
 
     @GetMapping("/aprovarConfirmado/{id}")
     public String aprovarMovimentacao(@PathVariable("id") Integer id) {
-        Optional<Movimentacao> movimentacao = mvR.findById(id);
-        if (movimentacao.get() != null) {
-            movimentacao.get().setStatus("APROVADO");
-            mvR.save(movimentacao.get());
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            if (movimentacao.get() != null) {
+                movimentacao.get().setStatus("APROVADO");
+                mvR.save(movimentacao.get());
+            }
+            return "redirect:/aprovar-movimentacao";
         }
-        return "redirect:/aprovar-movimentacao";
     }
 
     @GetMapping("/reprovar/{id}")
     public String confirmarReprovacao(@PathVariable("id") Integer id, Model model) {
-        Optional<Movimentacao> movimentacao = mvR.findById(id);
-        model.addAttribute("movimentacao", movimentacao.get());
-        return "internaAdm/confirmaReprovacao";
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            model.addAttribute("movimentacao", movimentacao.get());
+            return "internaAdm/confirmaReprovacao";
+        }
     }
 
     @GetMapping("/reprovarConfirmado/{id}")
     public String reprovarMovimentacao(@PathVariable("id") Integer id) {
-        Optional<Movimentacao> movimentacao = mvR.findById(id);
-        if (movimentacao.get() != null) {
-            movimentacao.get().setStatus("REPROVADO");
-            mvR.save(movimentacao.get());
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            if (movimentacao.get() != null) {
+                movimentacao.get().setStatus("REPROVADO");
+                mvR.save(movimentacao.get());
+            }
+            return "redirect:/aprovar-movimentacao";
         }
-        return "redirect:/aprovar-movimentacao";
+    }
+
+    @GetMapping("/editar-movimentacao")
+    public String abrirEditarMovimentacao(Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        }
+        List<Movimentacao> movimentacoes = (List<Movimentacao>) mvR.findAllNaoCanceladasOuRealizadas();
+        model.addAttribute("movimentacoes", movimentacoes);
+        return "internaAdm/editaMovimentacao";
+    }
+
+    @GetMapping("/concluir/{id}")
+    public String abrirConcluirMovimentacao(@PathVariable("id") Integer id, Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            if (movimentacao != null) {
+                model.addAttribute("movimentacao", movimentacao.get());
+                return "internaAdm/concluirMovimentacao";
+            }
+            return "redirect:/editar-movimentacao";
+        }
+    }
+
+    @GetMapping("/concluirConfirma/{id}")
+    public String concluirMovimentacao(@PathVariable("id") Integer id) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            if (movimentacao.get() != null) {
+                movimentacao.get().setStatus("REALIZADA"); // Colocando a movimentacao como concluida
+
+                Patrimonio patrimonio = movimentacao.get().getAtivo(); // Encontrando o ativo da movimentacao
+                patrimonio.setSala(movimentacao.get().getDestino()); // Trocando o ambiente do ativo
+                mvR.save(movimentacao.get());
+                ptR.save(patrimonio);
+            }
+            return "redirect:/editar-movimentacao";
+        }
+    }
+
+    @GetMapping("/cancelar/{id}")
+    public String abrirCancelarMovimentacao(@PathVariable("id") Integer id, Model model) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            if (movimentacao != null) {
+                model.addAttribute("movimentacao", movimentacao.get());
+                return "internaAdm/cancelarMovimentacao";
+            }
+            return "redirect:/editar-movimentacao";
+        }
+    }
+
+    @GetMapping("/cancelarConfirma/{id}")
+    public String cancelarMovimentacao(@PathVariable("id") Integer id) {
+        if (!acessoAdm) {
+            return "redirect:/login-adm";
+        } else {
+            Optional<Movimentacao> movimentacao = mvR.findById(id);
+            if (movimentacao.get() != null) {
+                movimentacao.get().setStatus("CANCELADA"); // Colocando a movimentacao como cancelada
+                mvR.save(movimentacao.get());
+            }
+            return "redirect:/editar-movimentacao";
+        }
     }
 
 }

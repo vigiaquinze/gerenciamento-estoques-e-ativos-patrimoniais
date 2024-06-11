@@ -18,6 +18,7 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Data da compra</th>
+                    <th>Status</th>
                     <th>Sala</th>
                     <th>Bloco</th>
                     <th></th>
@@ -29,7 +30,8 @@
                     <td th:text="${patrimonio.nome_do_ativo}"></td>
                     <td th:text="${patrimonio.descricao}"></td>
                     <td th:text="${patrimonio.data_compra}"></td>
-                    <td th:text="${patrimonio.sala.numero}"></td>
+                    <td th:text="${patrimonio.status}"></td>
+                    <td th:text="${patrimonio.sala.nome}"></td>
                     <td th:text="${patrimonio.sala.bloco}"></td>
                     <td class="actions">
                         <a href="" class="edit"><i class="fas fa-pen fa-xs"></i></a>

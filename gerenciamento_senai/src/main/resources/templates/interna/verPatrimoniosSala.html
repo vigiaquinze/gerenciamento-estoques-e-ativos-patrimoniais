@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>Buscar Patrimônio</title>
@@ -8,9 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/styleRead.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
-    <h2>Listar Patrimônios</h2>
+    <h2>Patrimônios cadastrados no ambiente <span th:text="${sala.nome}"></span></h2>
     <!-- Se existirem patrimônios encontrados, exibir na tabela -->
     <div class="content read">
         <table>
@@ -19,11 +17,8 @@
                     <td>ID</td>
                     <td>Nome</td>
                     <td>Descrição</td>
-                    <td>Status</td>
                     <td>Data da compra</td>
-                    <td>Sala</td>
-                    <td>Bloco</td>
-                    <td></td>
+                    <td>Status</td>
                     <!-- Adicione mais colunas se necessário -->
                 </tr>
             </thead>
@@ -32,23 +27,11 @@
                     <td th:text="${patrimonio.id_patrimonio}"></td>
                     <td th:text="${patrimonio.nome_do_ativo}"></td>
                     <td th:text="${patrimonio.descricao}"></td>
-                    <td th:text="${patrimonio.status}"></td>
                     <td th:text="${patrimonio.data_compra}"></td>
-                    <td th:text="${patrimonio.sala.nome}"></td>
-                    <td th:text="${patrimonio.sala.bloco}"></td>
-                    <td class="actions">
-                        <a th:href="@{'/editar/'+ ${patrimonio.id_patrimonio}}" class="edit"><i
-                                class="fas fa-pen fa-xs"></i></a>
-                    </td>
+                    <td th:text="${patrimonio.status}"></td>
                 </tr>
             </tbody>
         </table>
-        <a href="/cadastrar_patrimonio">
-            <div class="link-cadastro">
-                <h1>Cadastrar patrimonio</h1>
-            </div>
-        </a>
     </div>
 </body>
-
 </html>
