@@ -8,7 +8,7 @@ html {
 
 ::selection {
     color: #FFFFFF;
-    background: #324877;
+    background: #5c1616;
 }
 
 p {
@@ -29,7 +29,7 @@ h1 {
         "wdth" 100;
 }
 
-h2 {
+h2, label {
     font-family: "Bricolage Grotesque", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -38,7 +38,7 @@ h2 {
         "wdth" 100;
 }
 
-h3 {
+h3, span {
     font-family: "Bricolage Grotesque", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
@@ -47,7 +47,7 @@ h3 {
         "wdth" 100;
 }
 
-h4 {
+h4, input, textarea, select {
     font-family: "Bricolage Grotesque", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -70,107 +70,3 @@ body {
 
 }
 
-header {
-    background-color: #324877;
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0px 28px 24px -3px rgba(0, 0, 0, 0.1);
-}
-
-.title {
-    color: #ffffff;
-    height: 5vh;
-}
-
-.title img {
-    max-width: 100%;
-    height: 7vh;
-}
-
-.title h1 {
-    font-family: "Exo 2", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: italic;
-    letter-spacing: 2.4px;
-}
-
-
-nav {
-    margin-top: 0.7em;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    border: solid 2px #324877;
-}
-
-
-nav a {
-    color: #324877;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-
-nav a:hover {
-    background-color: #243455;
-    color: #ffffff;
-}
-
-nav .acesso {
-    display: flex;
-    justify-content: center;
-}
-
-#carouselExampleInterval {
-    margin-top: 2em;
-}
-
-.carousel-item {
-    height: 600px;
-}
-
-footer {
-    margin: 0 auto;
-    width: 100%;
-    background-color: #324877;
-}
-
-footer .container span {
-    color: #ffffff;
-}
-
-.index-container {
-    display: flex;
-    margin: 30px;
-    align-items: center;
-}
-
-.index-content {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.imgContent {
-    width: 50%;
-    margin: 50px;
-}
-
-.imgContent img:hover {
-    transform: scale(1.05);
-    transition: 0.6s;
-}
-
-.textContent {
-    width: 90%;
-    margin: 50px;
-}
-
-.textContent h1 {
-    font-size: 72px;
-    margin-bottom: 0.1em;
-}

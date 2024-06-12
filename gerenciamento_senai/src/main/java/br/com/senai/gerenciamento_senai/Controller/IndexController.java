@@ -49,12 +49,18 @@ public class IndexController {
 
     private boolean acessoFuncionario = false;
 
-    @GetMapping("/login")
+// Favicn
+    @GetMapping("favicon.ico")
+    String favicon() {
+        return "forward:/static/img/favicon.ico";
+    }
+
+    @GetMapping("/")
     public String loginPage() {
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String login(@RequestParam String email, @RequestParam String senha) {
         if (fnR.existsByEmail(email)) {
             try {
@@ -79,7 +85,7 @@ public class IndexController {
         if (acessoFuncionario) {
             return "interna/interna";
         } else {
-            return "redirect:/login";
+            return "redirect:/";
         }
     }
 
@@ -102,7 +108,7 @@ public class IndexController {
     @GetMapping("/cadastrar_patrimonio")
     public String abrirCadastrarPatrimonios(Model model) {
         if (!acessoFuncionario) {
-            return "redirect:/login";
+            return "redirect:/";
         } else {
             model.addAttribute("salas", slR.findAll());
             return "interna/cadastrarPatrimonio";
@@ -227,7 +233,7 @@ public class IndexController {
     @GetMapping("/editar/{id}")
     public String editarPatrimonio(@PathVariable("id") Integer id, Model model) {
         if (!acessoFuncionario) {
-            return "redirect:/login";
+            return "redirect:/";
         } else {
             Optional<Patrimonio> patrimonio = ptR.findById(id);
             if (patrimonio != null) {
@@ -261,7 +267,7 @@ public class IndexController {
     @GetMapping("/logout")
     public String logout() {
         acessoFuncionario = false;
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 }

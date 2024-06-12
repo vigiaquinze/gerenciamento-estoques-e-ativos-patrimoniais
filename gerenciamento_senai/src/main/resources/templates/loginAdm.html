@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-</head>
-<body>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleLogin.css}">
 
-    
-    <div>
-        <h2>Login adm</h2>
-        <form action="#" th:action="@{/login-adm}" method="post">
-            <div>
-                <label for="username">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Senha:</label>
-                <input type="password" id="senha" name="senha" required>
-            </div>
+</head>
+
+<body class="body-adm">
+    <div class="card-login-adm">
+        <div class="image">
+            <img th:src="@{/img/logo-senai1.png}" alt="logo">
+        </div>
+        <form action="#" th:action="@{/login-adm}" method="post" class="form-adm">
+            <label for="username">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Email de administrador">
+            <label for="password">Senha:</label>
+            <input type="password" id="senha" name="senha" required placeholder="Senha de administrador">
             <button type="submit">Entrar</button>
         </form>
+        <div class="link-adm">
+            <p style="color: white;">Não tem uma conta Adm? </p><a href="/">Faça login como funcionario</a>
+        </div>
     </div>
 </body>
+
 </html>

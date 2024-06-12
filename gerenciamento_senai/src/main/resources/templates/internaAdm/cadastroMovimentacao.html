@@ -4,19 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscar Patrimônio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleCadastro.css}">
 </head>
 
 <body>
-    <h2>Realizar movimentacao</h2>
-    <form action="/cadastro-movimentacao" method="get">
-        <input type="text" name="idPatrimonio" placeholder="Id do Patrimônio">
-        <input type="text" name="emailDoSolicitante" placeholder="Email do solicitante">
-        <button type="submit">Buscar</button>
-    </form>
-    <span class="${classe}" th:text="${msg}"></span>
+    <div class="navbar-titulo">
+        <h2>Realizar movimentacao</h2>
+    </div>
+    <div class="pre-cad">
+        <form action="/cadastro-movimentacao" method="get">
+            <input type="text" name="idPatrimonio" placeholder="Id do Patrimônio">
+            <input type="text" name="emailDoSolicitante" placeholder="Email do solicitante">
+            <button type="submit">Buscar</button>
+        </form>
+        <span class="resposta" th:text="${msg}"></span>
+    </div>
+
     <!-- Se existirem patrimônios encontrados, exibir na tabela -->
     <div th:if="${solicitante != null && patrimonio != null}">
-        <div class="container mt-5">
+        <div class="content update">
 
             <form action="/cadastro-movimentacao" method="POST">
                 <div class="form-group">
@@ -50,7 +57,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
-            <span class="${classe}" th:text="${msgCad}"></span>
+            <span class="resposta" th:text="${msgCad}"></span>
         </div>
 
     </div>

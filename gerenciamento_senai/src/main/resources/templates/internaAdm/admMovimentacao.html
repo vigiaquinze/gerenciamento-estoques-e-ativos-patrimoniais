@@ -4,51 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Movimentações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/styleRead.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <div class="content read">
-        <h2>Histórico de movimentações</h2>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Id</td>
-                        <td>Ativo</td>
-                        <td>Status</td>
-                        <td>Origem</td>
-                        <td>Destino</td>
-                        <td>Solicitante</td>
-                        <td>Data</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="movimentacao : ${movimentacoes}">
-                        <td th:text="${movimentacao.id_mov}"></td>
-                        <td th:text="${movimentacao.ativo.nome_do_ativo}"></td>
-                        <td th:text="${movimentacao.status}"></td>
-                        <td th:text="${movimentacao.origem.nome}"></td>
-                        <td th:text="${movimentacao.destino.nome}"></td>
-                        <td th:text="${movimentacao.solicitante.nome}"></td>
-                        <td th:text="${movimentacao.data_movimentacao}"></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="title">
+            <h2>Histórico de movimentações</h2>
         </div>
-        <a href="/cadastro-movimentacao" class="link-cadastro">
+        <table>
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Ativo</td>
+                    <td>Status</td>
+                    <td>Origem</td>
+                    <td>Destino</td>
+                    <td>Solicitante</td>
+                    <td>Data</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="movimentacao : ${movimentacoes}">
+                    <td th:text="${movimentacao.id_mov}"></td>
+                    <td th:text="${movimentacao.ativo.nome_do_ativo}"></td>
+                    <td th:text="${movimentacao.status}"></td>
+                    <td th:text="${movimentacao.origem.nome}"></td>
+                    <td th:text="${movimentacao.destino.nome}"></td>
+                    <td th:text="${movimentacao.solicitante.nome}"></td>
+                    <td th:text="${movimentacao.data_movimentacao}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="links">
+        <a href="/cadastro-movimentacao" class="link" style="width: 35em;">
             <div>
                 <h1>Realizar uma nova movimentacao</h1>
             </div>
         </a>
-        <a href="/aprovar-movimentacao" class="link-cadastro">
+        <a href="/aprovar-movimentacao" class="link">
             <div>
                 <h1>Aprovar movimentacoes</h1>
             </div>
         </a>
-        <a href="/editar-movimentacao" class="link-cadastro">
+        <a href="/editar-movimentacao" class="link" style="width: 35em;">
             <div>
                 <h1>Editar/Finalizar movimentacoes</h1>
             </div>

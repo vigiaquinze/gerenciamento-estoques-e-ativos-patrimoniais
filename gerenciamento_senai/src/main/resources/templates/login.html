@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleLogin.css}">
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
 </head>
+
 <body>
-    <div>
-        <h2>Login</h2>
+    <div class="card-login">
+        <div class="image">
+            <img th:src="@{/img/logo-senai1.png}" alt="logo">
+        </div>
         <form action="#" th:action="@{/login}" method="post">
-            <div>
-                <label for="username">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Senha:</label>
-                <input type="password" id="senha" name="senha" required>
-            </div>
+            <label for="username">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Email corporativo">
+            <label for="password">Senha:</label>
+            <input type="password" id="senha" name="senha" required placeholder="Senha">
             <button type="submit">Entrar</button>
         </form>
+        <div class="link-adm">
+            <p>Você é um Adm? </p><a href="/login-adm">Faça login como administrador</a>
+        </div>
     </div>
 </body>
+
 </html>

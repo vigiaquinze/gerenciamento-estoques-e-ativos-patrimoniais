@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscar Patrimônio</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/styleRead.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-    <h2>Listar Patrimônios</h2>
+
     <!-- Se existirem patrimônios encontrados, exibir na tabela -->
     <div class="content read">
+        <div class="title">
+            <h2>Ativo Patrimôniais cadastrados</h2>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -37,14 +41,17 @@
                     <td th:text="${patrimonio.sala.nome}"></td>
                     <td th:text="${patrimonio.sala.bloco}"></td>
                     <td class="actions">
-                        <a th:href="@{'/editar/'+ ${patrimonio.id_patrimonio}}" class="edit"><i
-                                class="fas fa-pen fa-xs"></i></a>
+                        <a th:href="@{'/editar/'+ ${patrimonio.id_patrimonio}}" class="edit">
+                            <p>Editar</p>
+                        </a>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="links">
         <a href="/cadastrar_patrimonio">
-            <div class="link-cadastro">
+            <div class="link">
                 <h1>Cadastrar patrimonio</h1>
             </div>
         </a>

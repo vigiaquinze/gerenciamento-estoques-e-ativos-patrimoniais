@@ -4,20 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscar Patrimônio</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleCadastro.css}">
 </head>
 
 <body>
-    <h2>Realizar movimentacao</h2>
-    <form action="/solicitar_movimentacao" method="get">
-        <input type="text" name="idPatrimonio" placeholder="Id do Patrimônio">
-        <input type="text" name="emailDoSolicitante" placeholder="Seu e-mail">
-        <button type="submit">Buscar</button>
-    </form>
-    <span class="${classe}" th:text="${msg}"></span> 
-    <span class="${classe}" th:text="${msgCad}"></span> 
+    <div class="navbar-titulo">
+        <h2>Realizar movimentacao</h2>
+    </div>
+    <div class="pre-cad">
+        <form action="/solicitar_movimentacao" method="get">
+            <input type="text" name="idPatrimonio" placeholder="Id do Patrimônio">
+            <input type="text" name="emailDoSolicitante" placeholder="Seu e-mail">
+            <button type="submit">Buscar</button>
+        </form>
+        <span class="resposta" th:text="${msg}"></span>
+        <span class="resposta" th:text="${msgCad}"></span>
+    </div>
     <!-- Se existirem patrimônios encontrados, exibir na tabela -->
     <div th:if="${solicitante != null && patrimonio != null}">
-        <div class="container mt-5">
+        <div class="content update">
 
             <form action="/enviar-solicitacao" method="POST">
                 <div class="form-group">
@@ -49,7 +56,7 @@
                     <input type="text" class="form-control" id="ativo" name="ativo"
                         th:text="${patrimonio.nome_do_ativo}" th:value="${patrimonio.id_patrimonio}" required readonly>
                 </div>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit">Cadastrar</button>
             </form>
         </div>
 

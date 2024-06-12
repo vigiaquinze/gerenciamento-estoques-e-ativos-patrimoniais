@@ -1,0 +1,146 @@
+.content {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+.content h2 {
+    margin: 0;
+    padding: 25px 0;
+    font-size: 22px;
+    border-bottom: 1px solid #ebebeb;
+    color: #666666;
+}
+
+.update form {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.update form .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.update form label {
+    display: inline-flex;
+    width: 400px;
+    padding: 10px 0;
+    margin: 5px;
+}
+
+.update form input {
+    padding: 10px;
+    width: 400px;
+    border: 1px solid #cccccc;
+    margin: 5px;
+}
+
+.update form textarea {
+    padding: 10px;
+    height: 20px;
+    width: 400px;
+}
+
+.update form select {
+    padding: 10px;
+    width: 400px;
+    border: 1px solid #cccccc;
+    margin: 5px;
+}
+
+.update form button[type="submit"] {
+    width: 55em;
+    padding: 0.75em;
+    background-color: rgb(128, 26, 26);
+    border: 1px solid rgb(241, 90, 90);
+    border-radius: 7px;
+    color: white;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.update form button[type="submit"]:hover {
+    background-color: rgb(170, 67, 67);
+    transition: 0.4s;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.update form a {
+    margin-top: 0.2em;
+    margin-left: 0.5em;
+    color: white;
+    width: 200px;
+    height: 45px;
+    background-color: #414141;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.update form a:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+    background-color: #535353;
+}
+
+.navbar-titulo {
+    margin-top: 10px;
+    width: 100%;
+    padding: 0.2em 1.4em;
+    background: #f6e6e7;
+    color: rgb(196, 27, 27);
+    font-size: 24px;
+    border: 2px solid #af8b8b;
+    margin-bottom: 1.5em;
+}
+
+.pre-cad {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.pre-cad form input {
+    padding: 1em;
+    height: 10px;
+    width: 14em;
+    border-radius: 5px;
+    border: 1px solid rgb(163, 158, 158);
+}
+
+.pre-cad form button {
+    width: 10em;
+    padding: 0.75em;
+    background-color: rgb(128, 26, 26);
+    border: 1px solid rgb(241, 90, 90);
+    border-radius: 7px;
+    color: white;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.pre-cad form button:hover {
+    background-color: rgb(170, 67, 67);
+    transition: 0.4s;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.resposta {
+    color: rgb(148, 33, 33);
+}
