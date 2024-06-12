@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Patrimônio</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleCadastro.css}">
+</head>
+
+<body>
+    <div class="navbar-titulo">
+        <h2>Editar Patrimônio</h2>
+    </div>
+    <div class="content update">
+        <span class="${classe}" th:text="${msg}"></span>
+        <form method="POST">
+            <div class="form-group">
+                <label for="nome_do_ativo">Nome do Ativo:</label>
+                <input type="text" class="form-control" id="nome_do_ativo" name="nome_do_ativo" required
+                    th:value="${patrimonio.nome_do_ativo}">
+            </div>
+            <div class="form-group">
+                <label for="data_compra">Data de Compra:</label>
+                <input type="date" class="form-control" id="data_compra" name="data_compra" required readonly
+                    th:value="${patrimonio.data_compra}">
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea class="form-control" id="descricao" name="descricao" required
+                    th:text="${patrimonio.descricao}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <input type="text" class="form-control" id="status" name="status" required
+                    th:value="${patrimonio.status}">
+            </div>
+            <div class=" form-group">
+                <label for="sala">Sala:</label>
+                <input type="text" class="form-control" id="sala" name="sala" required readonly
+                    th:value="${patrimonio.sala.id}">
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap"></script>

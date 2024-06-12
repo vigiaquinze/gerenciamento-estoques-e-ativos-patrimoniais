@@ -1,5 +1,5 @@
 .content {
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     margin-top: 2em;
     display: flex;
@@ -10,6 +10,7 @@
     border-radius: 10px;
     border: 2px solid #daa3a3;
     padding: 6px 0px;
+    margin-right: 1em;
 }
 
 .content h2 {
@@ -96,13 +97,15 @@
 }
 .read table tbody tr td.actions .trash {
     background-color: #b73737;
-    padding: 5px 10px;
+    padding: 15px 14px;
 }
 .read table tbody tr td.actions .trash:hover {
     background-color: #a33131;
+
 }
 .read table tbody tr td.actions .edit {
     background-color: #2b2b2b;
+    padding: 15px 14px;
 }
 .read table tbody tr td.actions .aprovar {
     background-color: #0f5214;
@@ -117,11 +120,12 @@
 }
 
 .links{
-    width: 100%;
+    width: 70%;
     justify-content: center;
     align-items: center;
     display: flex;
     margin-top: 1em;
+    float: right;
 }
 
 .links a{

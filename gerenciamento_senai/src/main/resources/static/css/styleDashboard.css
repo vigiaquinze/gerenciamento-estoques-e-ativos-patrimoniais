@@ -1,0 +1,24 @@
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    flex: 1 0 30%;
+}
+
+.card-title {
+    margin-bottom: 10px;
+}
+
+.card-content h5 {
+    font-size: 1.5em;
+    margin: 0;
+}

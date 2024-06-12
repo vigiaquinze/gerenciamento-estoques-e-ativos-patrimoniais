@@ -78,10 +78,15 @@ public class LoginAdmController {
     }
 
     @GetMapping("/interna-adm")
-    public String abrirInternaAdm() {
+    public String abrirInternaAdm(Model model) {
         if (!acessoAdm) {
             return "redirect:/login-adm";
         }
+        model.addAttribute("nPatrimonios", ptR.count());
+        model.addAttribute("nAmbientes", slR.count());
+        model.addAttribute("nFuncionarios", fnR.count());
+        model.addAttribute("nMov", mvR.count());
+        model.addAttribute("mediaPatrimonioSala", ptR.calcularMediaPatrimoniosPorSala());
         return "internaAdm/internaIndex";
     }
 
@@ -168,10 +173,11 @@ public class LoginAdmController {
     }
 
     @GetMapping("/cadastro-sala")
-    public String abrirCadastroSala() {
+    public String abrirCadastroSala(Model model) {
         if (!acessoAdm) {
             return "redirect:/login-adm";
         }
+        model.addAttribute("funcionarios", fnR.findAll());
         return "internaAdm/cadastroAmbiente";
     }
 
@@ -179,7 +185,7 @@ public class LoginAdmController {
     public ModelAndView admCadastrarSala(Salas sala, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/cadastro-sala");
 
-        if (slR.existsByNome(sala.getNome())) {
+        if (!slR.existsByNome(sala.getNome())) {
             slR.save(sala);
             String mensagem = "Cadastro realizado com sucesso";
             System.out.println(mensagem);
@@ -264,16 +270,20 @@ public class LoginAdmController {
         }
         if (idPatrimonio != null && !idPatrimonio.isEmpty() && emailDoSolicitante != null
                 && !emailDoSolicitante.isEmpty()) {
-            Funcionarios solicitante = fnR.findByEmail(emailDoSolicitante);
+            Optional<Funcionarios> solicitante = fnR.findByEmail(emailDoSolicitante);
             Optional<Patrimonio> patrimonio = ptR.findById(Integer.parseInt(idPatrimonio));
-
-            if (solicitante != null && patrimonio != null) {
-                List<Salas> salas = (List<Salas>) slR.findAll();
-                model.addAttribute("salas", salas);
-                model.addAttribute("msg", "Funcionario e patriomonio encontrado!");
-                model.addAttribute("solicitante", solicitante);
-                model.addAttribute("patrimonio", patrimonio.get());
-            } else {
+            try {
+                if (solicitante != null && patrimonio != null) {
+                    List<Salas> salas = (List<Salas>) slR.findAll();
+                    model.addAttribute("salas", salas);
+                    model.addAttribute("msg", "Funcionario e patriomonio encontrado!");
+                    model.addAttribute("solicitante", solicitante.get());
+                    model.addAttribute("patrimonio", patrimonio.get());
+                } else {
+                    model.addAttribute("msg", "Funcionario e/ou patriomonio não encontrado!");
+                }
+            } catch (Exception e) {
+                System.err.println(e);
                 model.addAttribute("msg", "Funcionario e/ou patriomonio não encontrado!");
             }
         }
@@ -418,6 +428,40 @@ public class LoginAdmController {
                 mvR.save(movimentacao.get());
             }
             return "redirect:/editar-movimentacao";
+        }
+    }
+
+    @GetMapping("/adm-registrar-saida")
+    public String abrirRegistrarSaida(Model model) {
+        model.addAttribute("itens", csR.findAll());
+        return "internaAdm/AdmRegistrarSaida";
+    }
+
+    @GetMapping("/editar-ptr/{id}")
+    public String editarPatrimonio(@PathVariable("id") Integer id, Model model) {
+        if (!acessoAdm) {
+            return "redirect:/";
+        } else {
+            Optional<Patrimonio> patrimonio = ptR.findById(id);
+            if (patrimonio != null) {
+                model.addAttribute("patrimonio", patrimonio.get());
+                return "internaAdm/editarPatrimoniosAdm";
+            } else {
+                return "redirect:/adm_patrimonio";
+            }
+
+        }
+    }
+
+    @PostMapping("/editar-ptr/{id}")
+    public String enviaEditarPatriomonio(@PathVariable("id") Integer id, Patrimonio patrimonio) {
+        try {
+            patrimonio.setId_patrimonio(id);
+            ptR.save(patrimonio);
+            return "redirect:/adm_patrimonio";
+        } catch (Exception e) {
+            System.err.println(e);
+            return "redirect:/adm_patrimonio";
         }
     }
 

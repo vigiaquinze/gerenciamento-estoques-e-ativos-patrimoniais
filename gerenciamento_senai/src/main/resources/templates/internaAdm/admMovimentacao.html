@@ -10,6 +10,31 @@
 </head>
 
 <body>
+    <div class="sideBar">
+        <div class="logo">
+            <img th:src="@{/img/logo-senai1.png}" alt="">
+        </div>
+        <ul>
+            <li><a href="/interna-adm" class="link-sidebar"><i class="fa-solid fa-inbox"></i> Dashboard</a></li>
+            <li><a href="/adm_funcionarios" class="link-sidebar"><i class="fa-solid fa-circle-user"></i>
+                    Funcionários</a></li>
+            <li><a href="/adm_patrimonio" class="link-sidebar"><i class="fa-solid fa-star"></i> Ativos</a></li>
+            <li><a href="/adm_sala" class="link-sidebar"><i class="fa-solid fa-house"></i> Ambientes</a></li>
+            <li><a href="/adm_consumo" class="link-sidebar"><i class="fa-solid fa-box"></i> Estoque</a></li>
+            <li class="active"><a href="/adm_mov" class="link-sidebar"><i class="fa-solid fa-arrows-alt-v"></i>
+                    Movimentações</a></li>
+        </ul>
+    </div>
+    <div class="navBar">
+        <ul>
+            <li><input type="text" placeholder="Buscar..."></li>
+            <div class="iconsBar">
+                <i class="fa-solid fa-cog"></i>
+                <i class="fa-solid fa-bell"></i>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyqI7u9US1GS-0749Cj7KOXgxxHrgkLqgtEw&s">
+            </div>
+        </ul>
+    </div>
     <div class="content read">
         <div class="title">
             <h2>Histórico de movimentações</h2>
@@ -42,17 +67,17 @@
     <div class="links">
         <a href="/cadastro-movimentacao" class="link" style="width: 35em;">
             <div>
-                <h1>Realizar uma nova movimentacao</h1>
+                <h1 style="font-size: 18px;">Realizar uma nova movimentacao</h1>
             </div>
         </a>
         <a href="/aprovar-movimentacao" class="link">
             <div>
-                <h1>Aprovar movimentacoes</h1>
+                <h1 style="font-size: 18px;">Aprovar movimentacoes</h1>
             </div>
         </a>
         <a href="/editar-movimentacao" class="link" style="width: 35em;">
             <div>
-                <h1>Editar/Finalizar movimentacoes</h1>
+                <h1 style="font-size: 18px;">Editar/Finalizar movimentacoes</h1>
             </div>
         </a>
     </div>

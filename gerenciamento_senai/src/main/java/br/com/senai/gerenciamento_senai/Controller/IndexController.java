@@ -49,7 +49,7 @@ public class IndexController {
 
     private boolean acessoFuncionario = false;
 
-// Favicn
+    // Favicn
     @GetMapping("favicon.ico")
     String favicon() {
         return "forward:/static/img/favicon.ico";
@@ -64,12 +64,18 @@ public class IndexController {
     public String login(@RequestParam String email, @RequestParam String senha) {
         if (fnR.existsByEmail(email)) {
             try {
-                if (fnR.findByEmail(email).getSenha().trim().equals(senha.trim())) {
-                    acessoFuncionario = true;
-                    return "redirect:/interna";
+                Optional<Funcionarios> funcionario = fnR.findByEmail(email);
+                if (funcionario != null) {
+                    if (funcionario.get().getSenha().trim().equals(senha.trim())) {
+                        acessoFuncionario = true;
+                        return "redirect:/interna";
+                    } else {
+                        return "Senha Incorreta";
+                    }
                 } else {
-                    return "Senha Incorreta";
+                    return "Funcionario não encontrado";
                 }
+
             } catch (Exception e) {
                 System.out.println(e);
                 return "redirect:/login";
@@ -154,14 +160,14 @@ public class IndexController {
             @RequestParam(required = false) String emailDoSolicitante, Model model) {
         if (idPatrimonio != null && !idPatrimonio.isEmpty() && emailDoSolicitante != null
                 && !emailDoSolicitante.isEmpty()) {
-            Funcionarios solicitante = fnR.findByEmail(emailDoSolicitante);
+            Optional<Funcionarios> solicitante = fnR.findByEmail(emailDoSolicitante);
             Optional<Patrimonio> patrimonio = ptR.findById(Integer.parseInt(idPatrimonio));
 
             if (solicitante != null && patrimonio != null) {
                 List<Salas> salas = (List<Salas>) slR.findAll();
                 model.addAttribute("salas", salas);
                 model.addAttribute("msg", "Funcionario e patrimonio encontrado!");
-                model.addAttribute("solicitante", solicitante);
+                model.addAttribute("solicitante", solicitante.get());
                 model.addAttribute("patrimonio", patrimonio.get());
             } else {
                 model.addAttribute("msg", "Funcionario e/ou patrimonio não encontrado!");
@@ -247,7 +253,7 @@ public class IndexController {
     }
 
     @PostMapping("/editar/{id}")
-    public String enviaEditarPatriomonio(@PathVariable("id") Integer id,Patrimonio patrimonio) {
+    public String enviaEditarPatriomonio(@PathVariable("id") Integer id, Patrimonio patrimonio) {
         try {
             patrimonio.setId_patrimonio(id);
             ptR.save(patrimonio);

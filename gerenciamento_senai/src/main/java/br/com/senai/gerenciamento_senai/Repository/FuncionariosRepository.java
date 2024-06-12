@@ -10,6 +10,6 @@ public interface FuncionariosRepository extends CrudRepository<Funcionarios, Int
 
     boolean existsByEmail(String email);
 
-    Funcionarios findByEmail(String email);
+    Optional<Funcionarios> findByEmail(String email);
 
 }
