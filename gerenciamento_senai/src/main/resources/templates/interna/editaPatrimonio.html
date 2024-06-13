@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Patrimônio</title>
     <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleCadastro.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="content update">
         <span class="${classe}" th:text="${msg}"></span>
-        <h2>Cadastro de Patrimônio</h2>
+        <h2>Editando Patrimônio</h2>
         <form method="POST">
             <div class="form-group">
                 <label for="nome_do_ativo">Nome do Ativo:</label>
@@ -22,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="data_compra">Data de Compra:</label>
-                <input type="date" class="form-control" id="data_compra" name="data_compra" required readonly th:value="${patrimonio.data_compra}" th:text="${patrimonio.data_compra}">
+                <input type="date" class="form-control" id="data_compra" name="data_compra" required readonly th:value="${patrimonio.data_compra}">
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição:</label>
