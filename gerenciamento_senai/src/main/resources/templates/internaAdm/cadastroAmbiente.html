@@ -51,7 +51,7 @@
                 <input type="text" class="form-control" id="nome" name="nome" required>
             </div>
             <div class="form-group">
-                <label for="responsavel">Funcionario responsável::</label>
+                <label for="responsavel">Funcionario responsável:</label>
                 <select class="form-control" id="funcionario" name="funcionario" required>
                     <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.re}" th:text="${funcionario.nome}"></option>
                 </select>
