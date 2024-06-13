@@ -89,11 +89,16 @@ public class IndexController {
     @GetMapping("/interna")
     public String getInternaPage(Model model) {
         if (acessoFuncionario) {
+            List<Patrimonio> totalPatrimonios = (List<Patrimonio>) ptR.findAll();
             model.addAttribute("nPatrimonios", ptR.count());
             model.addAttribute("nAmbientes", slR.count());
             model.addAttribute("nFuncionarios", fnR.count());
             model.addAttribute("nMov", mvR.count());
-            model.addAttribute("mediaPatrimonioSala", ptR.calcularMediaPatrimoniosPorSala());
+            if (totalPatrimonios.size() > 0) {
+                model.addAttribute("mediaPatrimonioSala", ptR.calcularMediaPatrimoniosPorSala());
+            } else {
+                model.addAttribute("mediaPatrimonioSala", "Não há patrimônios cadastrados!");
+            }
             return "interna/interna";
         } else {
             return "redirect:/";
@@ -253,7 +258,6 @@ public class IndexController {
             } else {
                 return "redirect:/listar_patrimonios";
             }
-
         }
     }
 

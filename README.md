@@ -188,21 +188,26 @@ O Sistema de Gerenciamento de Estoque e Ativos Patrimoniais foi desenvolvido uti
 
 
 
+### Acesso ao usuário comum:
+<h1>
+<img src="./prototipo_html/img/gifFun.gif">
+</br>
+</h1>
+
 ### Acesso ao usuário administrador:
 <h1>
 <img src="./prototipo_html/img/gifAdm.gif">
 </br>
 </h1>
 
-## Instalação e Configuração
-[Descreva aqui as instruções necessárias para instalação e configuração do sistema, incluindo pré-requisitos de software e passos para configuração do banco de dados, se aplicável.]
+## Orientações:
+ - Inserir o cpf do administrador manualmente na base de dados, depois realizar o cadastro
+ 
 
-## Guia do Usuário
-[Forneça um guia simples para os usuários finais sobre como utilizar o sistema, incluindo instruções para login, navegação nas funcionalidades e geração de relatórios.]
+## Criadores:
+ - **[João Vittor Domingos De Jesus](https://github.com/joaovittordjesus)**
 
-## Créditos
-[Se aplicável, forneça informações sobre como outros desenvolvedores podem contribuir para o projeto, incluindo orientações sobre como enviar pull requests ou relatar problemas.]
+ - **[Ryan Gabriel De Julio](https://github.com/ryangabriel27)**
 
-## Colaboradores da Criação do Sistema
-[Forneça informações de contato para suporte ou dúvidas relacionadas ao sistema.]
+ - **[Victor Hugo Barbosa](https://github.com/vigiaquinze)**
 

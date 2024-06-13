@@ -49,7 +49,7 @@ public class LoginAdmController {
 
     @Autowired
     MovimentacaoRepository mvR;
-    
+
     @Autowired
     VerificaCadastroAdmRepository verAdm;
 
@@ -63,7 +63,6 @@ public class LoginAdmController {
         return "cadastroAdm";
     }
 
-    
     @PostMapping("cad-adm")
     public ModelAndView cadastroAdm(Administrador adm, RedirectAttributes attributes) {
 
@@ -86,9 +85,6 @@ public class LoginAdmController {
 
         return mv;
     }
-
-    
-
 
     @GetMapping("/login-adm")
     public String loginPage() {
@@ -116,6 +112,7 @@ public class LoginAdmController {
 
     @GetMapping("/interna-adm")
     public String abrirInternaAdm(Model model) {
+        List<Patrimonio> totalPatrimonios = (List<Patrimonio>) ptR.findAll();
         if (!acessoAdm) {
             return "redirect:/login-adm";
         }
@@ -123,7 +120,11 @@ public class LoginAdmController {
         model.addAttribute("nAmbientes", slR.count());
         model.addAttribute("nFuncionarios", fnR.count());
         model.addAttribute("nMov", mvR.count());
-        model.addAttribute("mediaPatrimonioSala", ptR.calcularMediaPatrimoniosPorSala());
+        if (totalPatrimonios.size() > 0) {
+            model.addAttribute("mediaPatrimonioSala", ptR.calcularMediaPatrimoniosPorSala());
+        } else {
+            model.addAttribute("mediaPatrimonioSala", "Não há patrimônios cadastrados!");
+        }
         return "internaAdm/internaIndex";
     }
 
