@@ -5,16 +5,81 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleRead.css}">
+    <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
 </head>
 
 <body>
-    <h1>Login reconhecido!</h1>
-    <a href="/buscar_patrimonio">Procurar Ativo Patrimonial</a>
-    <a href="/listar_patrimonios">Ver todos os ativos patrimoniais</a>
-    <a href="/listar_salas">Ver todos os ambientes</a>
-    <a href="/listar_movimentacoes">Verificar movimentacoes</a>
-    <a href="/listar_armazem">Ver estoque de itens de consumo</a>
-    <a href="/logout">Logout</a>
+    <div class="sideBar">
+        <div class="logo">
+            <img th:src="@{/img/logo-senai1.png}" alt="">
+        </div>
+        <ul>
+            <li class="active"><a href="/interna" class="link-sidebar"><i class="fa-solid fa-inbox"></i>
+                    Dashboard</a></li>
+            <li><a href="/listar_patrimonios" class="link-sidebar"><i class="fa-solid fa-star"></i> Ativos</a></li>
+            <li><a href="/listar_salas" class="link-sidebar"><i class="fa-solid fa-house"></i> Ambientes</a>
+            </li>
+            <li><a href="/listar_armazem" class="link-sidebar"><i class="fa-solid fa-box"></i> Estoque</a></li>
+            <li><a href="/listar_movimentacoes" class="link-sidebar"><i class="fa-solid fa-arrows-alt-v"></i> Movimentações</a></li>
+            <li><a href="/logout" class="link-sidebar"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+        </ul>
+    </div>
+    <div class="navBar">
+        <ul>
+            <li><input type="text" placeholder="Buscar..."></li>
+            <div class="iconsBar">
+                <i class="fa-solid fa-cog"></i>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Numero de patrimonio cadastrados</h3>
+                </div>
+                <div class="card-content">
+                    <h5 th:text="${nPatrimonios}"></h5>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <h3>Numero de ambientes cadastrados</h3>
+                </div>
+                <div class="card-content">
+                    <h5 th:text="${nAmbientes}"></h5>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <h3>Numero de funcionarios cadastrados</h3>
+                </div>
+                <div class="card-content">
+                    <h5 th:text="${nFuncionarios}"></h5>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <h3>Numero de movimentações registradas</h3>
+                </div>
+                <div class="card-content">
+                    <h5 th:text="${nMov}"></h5>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <h3>Média de patrimônios por sala</h3>
+                </div>
+                <div class="card-content">
+                    <h5 th:text="${mediaPatrimonioSala}"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

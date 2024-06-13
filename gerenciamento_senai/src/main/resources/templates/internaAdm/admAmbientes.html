@@ -57,7 +57,8 @@
                     <td th:text="${ambiente.bloco}"></td>
                     <td class="actions">
                         <a href="" class="edit"><i class="fas fa-pen fa-xs"></i></a>
-                        <a href="" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                        <a th:href="@{/verificarPatrimonios/{id}(id=${ambiente.id})}" class="edit"><i
+                                class="fas fa-list"></i> </a>
                     </td>
                 </tr>
             </tbody>

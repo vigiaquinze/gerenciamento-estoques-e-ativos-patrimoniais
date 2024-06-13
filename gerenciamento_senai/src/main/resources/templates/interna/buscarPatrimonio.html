@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Buscar Patrimônio</title>
     <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styleRead.css}">
+    <link rel="stylesheet" th:href="@{/css/styleCadastro.css}">
 </head>
+
 <body>
-    <h2>Buscar Patrimônio</h2>
-    <form action="/buscar_patrimonio" method="get">
-        <input type="text" name="nomeDoPatrimonio" placeholder="Nome do Patrimônio">
-        <button type="submit">Buscar</button>
-    </form>
-    
-    <!-- Se existirem patrimônios encontrados, exibir na tabela -->
-    <div th:if="${patrimoniosEncontrados != null}">
-        <h3>Resultados da Busca</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Sala</th>
-                    <th>Bloco</th>
-                    <!-- Adicione mais colunas se necessário -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="patrimonio : ${patrimoniosEncontrados}">
-                    <td th:text="${patrimonio.id_patrimonio}"></td>
-                    <td th:text="${patrimonio.nome_do_ativo}"></td>
-                    <td th:text="${patrimonio.descricao}"></td>
-                    <td th:text="${patrimonio.sala.nome}"></td>
-                    <td th:text="${patrimonio.sala.bloco}"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="sideBar">
+        <div class="logo">
+            <img th:src="@{/img/logo-senai1.png}" alt="">
+        </div>
+        <ul>
+            <li><a href="/interna" class="link-sidebar"><i class="fa-solid fa-inbox"></i>
+                    Dashboard</a></li>
+            <li class="active"><a href="/listar_patrimonios" class="link-sidebar"><i class="fa-solid fa-star"></i>
+                    Ativos</a></li>
+            <li><a href="/listar_salas" class="link-sidebar"><i class="fa-solid fa-house"></i> Ambientes</a>
+            </li>
+            <li><a href="/listar_armazem" class="link-sidebar"><i class="fa-solid fa-box"></i> Estoque</a></li>
+            <li><a href="/listar_movimentacoes" class="link-sidebar"><i class="fa-solid fa-arrows-alt-v"></i>
+                    Movimentações</a></li>
+            <li><a href="/logout" class="link-sidebar"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+        </ul>
+    </div>
+    <div class="navBar">
+        <ul>
+            <li><input type="text" placeholder="Buscar..."></li>
+            <div class="iconsBar">
+                <i class="fa-solid fa-cog"></i>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+        </ul>
+    </div>
+    <div class="navbar-titulo">
+        <h2>Buscar Patrimônio</h2>
+    </div>
+    <div class="content">
+        <div class="update">
+
+
+            <form action="/buscar_patrimonio" method="get">
+                <input type="text" name="nomeDoPatrimonio" placeholder="Nome do Patrimônio">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <div class="read">
+            <!-- Se existirem patrimônios encontrados, exibir na tabela -->
+            <div th:if="${patrimoniosEncontrados != null}">
+                <h3>Resultados da Busca</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Sala</th>
+                            <th>Bloco</th>
+                            <!-- Adicione mais colunas se necessário -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="patrimonio : ${patrimoniosEncontrados}">
+                            <td th:text="${patrimonio.id_patrimonio}"></td>
+                            <td th:text="${patrimonio.nome_do_ativo}"></td>
+                            <td th:text="${patrimonio.descricao}"></td>
+                            <td th:text="${patrimonio.sala.nome}"></td>
+                            <td th:text="${patrimonio.sala.bloco}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

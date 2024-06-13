@@ -11,6 +11,30 @@
 </head>
 
 <body>
+    <div class="sideBar">
+        <div class="logo">
+            <img th:src="@{/img/logo-senai1.png}" alt="">
+        </div>
+        <ul>
+            <li ><a href="/interna" class="link-sidebar"><i class="fa-solid fa-inbox"></i>
+                    Dashboard</a></li>
+            <li><a href="/listar_patrimonios" class="link-sidebar"><i class="fa-solid fa-star"></i> Ativos</a></li>
+            <li><a href="/listar_salas" class="link-sidebar"><i class="fa-solid fa-house"></i> Ambientes</a>
+            </li>
+            <li class="active"><a href="/listar_armazem" class="link-sidebar"><i class="fa-solid fa-box"></i> Estoque</a></li>
+            <li><a href="/listar_movimentacoes" class="link-sidebar"><i class="fa-solid fa-arrows-alt-v"></i> Movimentações</a></li>
+            <li><a href="/logout" class="link-sidebar"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+        </ul>
+    </div>
+    <div class="navBar">
+        <ul>
+            <li><input type="text" placeholder="Buscar..."></li>
+            <div class="iconsBar">
+                <i class="fa-solid fa-cog"></i>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+        </ul>
+    </div>
     <div class="content read">
         <div class="title">
             <h2>Estoque de itens de consumo</h2>

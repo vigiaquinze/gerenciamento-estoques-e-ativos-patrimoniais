@@ -187,6 +187,13 @@ O Sistema de Gerenciamento de Estoque e Ativos Patrimoniais foi desenvolvido uti
 ## Resultado Final:
 
 
+
+### Acesso ao usuário administrador:
+<h1>
+<img src="./prototipo_html/img/gifAdm.gif">
+</br>
+</h1>
+
 ## Instalação e Configuração
 [Descreva aqui as instruções necessárias para instalação e configuração do sistema, incluindo pré-requisitos de software e passos para configuração do banco de dados, se aplicável.]
 
