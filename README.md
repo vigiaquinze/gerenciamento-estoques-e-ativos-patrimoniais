@@ -1,1 +1,1 @@
-# Sistema de Gerenciamento de Estoque e Ativos Patrimoniais
+# Sistema de Gerenciamento de Estoque e Ativos Patrimoniais - SENAI
