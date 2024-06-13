@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
+import br.com.senai.gerenciamento_senai.Model.Administrador;
 import br.com.senai.gerenciamento_senai.Model.Consumo;
 import br.com.senai.gerenciamento_senai.Model.Funcionarios;
 import br.com.senai.gerenciamento_senai.Model.Movimentacao;
@@ -27,6 +28,7 @@ import br.com.senai.gerenciamento_senai.Repository.FuncionariosRepository;
 import br.com.senai.gerenciamento_senai.Repository.MovimentacaoRepository;
 import br.com.senai.gerenciamento_senai.Repository.PatrimonioRepository;
 import br.com.senai.gerenciamento_senai.Repository.SalasRepository;
+import br.com.senai.gerenciamento_senai.Repository.VerificaCadastroAdmRepository;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -47,6 +49,9 @@ public class LoginAdmController {
 
     @Autowired
     MovimentacaoRepository mvR;
+    
+    @Autowired
+    VerificaCadastroAdmRepository verAdm;
 
     @Autowired
     SalasRepository slR;
@@ -57,6 +62,31 @@ public class LoginAdmController {
     public String cadAdmPage() {
         return "cadastroAdm";
     }
+
+    
+    @PostMapping("cad-adm")
+    public ModelAndView cadastroAdm(Administrador adm, RedirectAttributes attributes) {
+
+        boolean verificaCpf = verAdm.existsById(adm.getCpf());
+
+        ModelAndView mv = new ModelAndView("redirect:/cad-adm");
+
+        if (verificaCpf) {
+            admR.save(adm);
+            String mensagem = "Cadastro realizado com sucesso";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+            attributes.addFlashAttribute("classe", "verde");
+        } else {
+            String mensagem = "Erro! Cadastro inválido. Verifique o pré-cadastro ou entre em contato com a secretaria.";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+            attributes.addFlashAttribute("classe", "vermelho");
+        }
+
+        return mv;
+    }
+
     
 
 

@@ -26,32 +26,6 @@ public class AdministradorController {
     @Autowired
     private AdministradorRepository admR;
 
-    @Autowired
-    private VerificaCadastroAdmRepository verAdm;
-
-    
-    @PostMapping("cad-adm")
-    public ModelAndView cadastroAdm(Administrador adm, RedirectAttributes attributes) {
-
-        boolean verificaCpf = verAdm.existsById(adm.getCpf());
-
-        ModelAndView mv = new ModelAndView("redirect:/login-adm");
-
-        if (verificaCpf) {
-            admR.save(adm);
-            String mensagem = "Cadastro realizado com sucesso";
-            System.out.println(mensagem);
-            attributes.addFlashAttribute("msg", mensagem);
-            attributes.addFlashAttribute("classe", "verde");
-        } else {
-            String mensagem = "Erro! Cadastro inválido. Verifique o pré-cadastro ou entre em contato com a secretaria.";
-            System.out.println(mensagem);
-            attributes.addFlashAttribute("msg", mensagem);
-            attributes.addFlashAttribute("classe", "vermelho");
-        }
-
-        return mv;
-    }
 
 
     @GetMapping
