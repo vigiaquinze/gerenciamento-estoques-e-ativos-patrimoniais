@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.senai.gerenciamento_senai.Model.Administrador;
 import br.com.senai.gerenciamento_senai.Repository.AdministradorRepository;
+import br.com.senai.gerenciamento_senai.Repository.VerificaCadastroAdmRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -22,6 +25,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdministradorController {
     @Autowired
     private AdministradorRepository admR;
+
+    @Autowired
+    private VerificaCadastroAdmRepository verAdm;
+
+    
+    @PostMapping("cad-adm")
+    public ModelAndView cadastroAdm(Administrador adm, RedirectAttributes attributes) {
+
+        boolean verificaCpf = verAdm.existsById(adm.getCpf());
+
+        ModelAndView mv = new ModelAndView("redirect:/login-adm");
+
+        if (verificaCpf) {
+            admR.save(adm);
+            String mensagem = "Cadastro realizado com sucesso";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+            attributes.addFlashAttribute("classe", "verde");
+        } else {
+            String mensagem = "Erro! Cadastro inválido. Verifique o pré-cadastro ou entre em contato com a secretaria.";
+            System.out.println(mensagem);
+            attributes.addFlashAttribute("msg", mensagem);
+            attributes.addFlashAttribute("classe", "vermelho");
+        }
+
+        return mv;
+    }
+
 
     @GetMapping
     public List<Administrador> getAllAdministrador() {
@@ -33,15 +64,15 @@ public class AdministradorController {
         return admR.save(adm);
     }
 
-    @GetMapping("/{id}")
-    public Optional<Administrador> getAdministradorById(@PathVariable Integer id) {
-        return admR.findById(id);
+    @GetMapping("/{cpf}")
+    public Optional<Administrador> getAdministradorById(@PathVariable String cpf) {
+        return admR.findById(cpf);
     }
 
-    @PutMapping("/{id}")
-    public Administrador updateAdmById(@PathVariable Integer id, @RequestBody Administrador adm) {
-        if (admR.existsById(id)) {
-            adm.setId_adm(id);
+    @PutMapping("/{cpf}")
+    public Administrador updateAdmById(@PathVariable String cpf, @RequestBody Administrador adm) {
+        if (admR.existsById(cpf)) {
+            adm.setCpf(cpf);
             return admR.save(adm);
         } else {
             return null;
@@ -49,9 +80,9 @@ public class AdministradorController {
 
     }
 
-    @DeleteMapping("/{id}")
-    public List<Administrador> deleteAdm(@PathVariable Integer id) {
-        admR.deleteById(id);
+    @DeleteMapping("/{cpf}")
+    public List<Administrador> deleteAdm(@PathVariable String cpf) {
+        admR.deleteById(cpf);
         return (List<Administrador>) admR.findAll();
     }
 

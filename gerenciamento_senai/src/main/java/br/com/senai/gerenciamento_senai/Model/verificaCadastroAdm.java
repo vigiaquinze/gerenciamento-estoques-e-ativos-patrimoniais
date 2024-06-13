@@ -5,7 +5,7 @@ import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-public class verificaCadastroAdm {
+public class VerificaCadastroAdm {
     // Atributos
     @Id
     private String cpf;

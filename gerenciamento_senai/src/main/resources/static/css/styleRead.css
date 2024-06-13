@@ -1,5 +1,5 @@
 .content {
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
     margin-top: 2em;
     display: flex;
@@ -39,7 +39,7 @@
     border-radius: 15px;
 }
 .read table thead {
-    background-color: #c07f85;
+    background-color: #DDB9BB;
 }
 .read table thead td {
     text-align: center  ;
@@ -49,13 +49,11 @@
     font-size: 14px;
     font-family: "Bricolage Grotesque", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 600;
     font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+    font-weight: 900;
 }
 .read table tbody tr {
-    border-bottom: 1px solid #d3dae0;
+    border-bottom: 2px solid #DDB9BB;
 }
 .read table tbody td {
     font-family: "Bricolage Grotesque", sans-serif;
@@ -132,7 +130,15 @@
     text-decoration: none;
 }
 
-.links .link{
+.links{
+    padding: 1.25em 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.link{
     padding: 1.25em 3em;
     width: 25em;
     font-size: 10px;
@@ -143,10 +149,11 @@
     align-items: center;
     border-radius: 15px;
     height: 1.5em;
-    margin: 1em;
+    margin: 0px auto;
+    transition: 0.4s;
 }
 
-.links .link:hover{
+.link:hover{
     transition: 0.4s;
     background-color: rgb(139, 50, 50);
     transform: scale(1.05);

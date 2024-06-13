@@ -14,9 +14,6 @@ import lombok.Setter;
 @Setter
 public class Administrador implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id_adm;
-
     String cpf;
 
     String usuario;

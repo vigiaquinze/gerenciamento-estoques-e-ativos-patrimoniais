@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import br.com.senai.gerenciamento_senai.Model.Administrador;
 import java.util.List;
 
-public interface AdministradorRepository extends CrudRepository<Administrador, Integer> {
+public interface AdministradorRepository extends CrudRepository<Administrador, String> {
 
     Administrador findByEmail(String email);
 

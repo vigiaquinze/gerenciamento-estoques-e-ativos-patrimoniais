@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="sideBar">
+        <div class="logo">
+            <img th:src="@{/img/logo-senai1.png}" alt="">
+        </div>
+        <ul>
+            <li><a href="/interna-adm" class="link-sidebar"><i class="fa-solid fa-inbox"></i> Dashboard</a></li>
+            <li><a href="/adm_funcionarios" class="link-sidebar"><i class="fa-solid fa-circle-user"></i> Funcionários</a></li>
+            <li><a href="/adm_patrimonio" class="link-sidebar"><i class="fa-solid fa-star"></i> Ativos</a></li>
+            <li><a href="/adm_sala" class="link-sidebar"><i class="fa-solid fa-house"></i> Ambientes</a></li>
+            <li class="active"><a href="/adm_consumo" class="link-sidebar"><i class="fa-solid fa-box"></i> Estoque</a></li>
+            <li><a href="/adm_mov" class="link-sidebar"><i class="fa-solid fa-arrows-alt-v"></i> Movimentações</a></li>
+            <li><a href="/logout_adm" class="link-sidebar"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
+        </ul>
+    </div>
+    <div class="navBar">
+        <ul>
+            <li><input type="text" placeholder="Buscar..."></li>
+            <div class="iconsBar">
+                <i class="fa-solid fa-cog"></i>
+                <i class="fa-solid fa-bell"></i>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyqI7u9US1GS-0749Cj7KOXgxxHrgkLqgtEw&s">
+            </div>
+        </ul>
+    </div>
 </body>
 </html>

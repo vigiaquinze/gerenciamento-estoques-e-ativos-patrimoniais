@@ -53,6 +53,13 @@ public class LoginAdmController {
 
     boolean acessoAdm = false;
 
+    @GetMapping("/cad-adm")
+    public String cadAdmPage() {
+        return "cadastroAdm";
+    }
+    
+
+
     @GetMapping("/login-adm")
     public String loginPage() {
         return "loginAdm";
