@@ -78,7 +78,7 @@ public class IndexController {
 
             } catch (Exception e) {
                 System.out.println(e);
-                return "redirect:/login";
+                return "redirect:/";
             }
         } else {
             return "Funcionario não encontrado!";

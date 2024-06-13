@@ -51,9 +51,14 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
-    public List<Funcionarios> deleteFuncionario(@PathVariable Integer id){  
-        fnR.deleteById(id);
-        return (List<Funcionarios>) fnR.findAll();
+    public Funcionarios deleteFuncionario(@PathVariable Integer id) {
+        Optional<Funcionarios> funcionario = fnR.findById(id);
+        if (funcionario.isPresent()) {
+            fnR.deleteById(id);
+            return funcionario.get();
+        } else {
+            return null;
+        }
     }
 
 }
